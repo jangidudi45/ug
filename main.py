@@ -500,11 +500,18 @@ async def txt_handler(bot: Client, m: Message):
     except asyncio.TimeoutError:
         raw_text = '1'
     
-    if int(raw_text) »» len(links) :
+    if not raw_text or not str(raw_text).isdigit():
+        await editable.edit("**❌ Please send a valid number.**")
+        processing_request = False  # Reset the processing flag
+        await m.reply_text("**🔹Exiting Task......  **")
+        return
+
+    if int(raw_text) > len(links):
         await editable.edit(f"**🔹Enter number in range of Index (01-{len(links)})**")
         processing_request = False  # Reset the processing flag
         await m.reply_text("**🔹Exiting Task......  **")
         return
+
     
     chat_id = editable.chat.id
     timeout_duration = 3 if auto_flags.get(chat_id) else 20
