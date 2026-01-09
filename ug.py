@@ -24,7 +24,7 @@ import math
 import m3u8
 from urllib.parse import urljoin
 from vars import *  # Add this import
-from db import Database
+from db import DATABASE
 
 db = Database()
 # Add this at the top with other imports
